@@ -5,6 +5,6 @@ from . import views
 urlpatterns = [
     re_path('login/', views.login ),
     re_path('register/', views.register ),
-    # re_path('forgot-password', views.forgot_password), 
+    re_path('forgot-password', views.forgot_password), 
  
 ]
