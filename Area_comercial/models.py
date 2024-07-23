@@ -3,47 +3,22 @@ from django.db import models
 #Creacion de tablas
 
 # Tabla de Empresa
-class Empresa(models.Model):
- Nombre = models.CharField(max_length=200)
+class Informe(models.Model):
+ Mes = models.CharField(max_length=200)
+ Cliente = models.CharField(max_length=200)
  Nuevo = models.CharField(max_length=200)
- Sector = models.CharField(max_length=200)
- Licitacion_id = models.ForeignKey("Licitacion",on_delete=models.CASCADE)
- Canal = models.CharField(max_length=200)
- Contacto_id = models.ForeignKey("Contacto",on_delete=models.CASCADE)
-    
-    
-    
-    
-# Tabla de Licitacion    
-class Licitacion(models.Model):
-    Servicio = models.CharField(max_length=200)
-    Descripcion = models.CharField(max_length=200)
-    Estado = models.CharField(max_length=200)
-    Cobro_id = models.ForeignKey("Cobro",on_delete=models.CASCADE)
-    Causa_negacion = models.CharField(max_length=200)
-    Nota_id = models.ForeignKey("Notas",on_delete=models.CASCADE)
-    
-    
-# Tabla de Cobro   
-class Cobro(models.Model):
-    Monto = models.IntegerField
-    Campaña = models.CharField(max_length=200)
-   
+ Descripcion = models.CharField(max_length=200)
+ Estado = models.CharField(max_length=200)
+ Pago_mensual = models.CharField(max_length=200)
+ Por_campaña = models.CharField(max_length=200,default=0)
+ Sector = models.CharField(max_length=200)   
+ Canal_medio = models.CharField(max_length=200, default='l')
+ Causal_negacion = models.CharField(max_length=200)   
+ Observaciones = models.CharField(max_length=200,default=0)   
+ Contacto = models.CharField(max_length=100, default=0)
 
-# Tabla de Contacto     
-class Contacto(models.Model):
-    Encargado = models.CharField(max_length=200)
-    Telefono = models.CharField(max_length=200)
-    Correo = models.CharField(max_length=200)
-   
-
-# Tabla de Notas     
-class Notas(models.Model):
-    Descripcion = models.CharField(max_length=200)
-    
-    
-    
-
-   
-
-
+class Empresa(models.Model):
+ Nombre_empresa = models.CharField(max_length=200)
+ Encargado = models.CharField(max_length=200)
+ Telefono = models.CharField(max_length=200)
+ Email = models.CharField(max_length=200)

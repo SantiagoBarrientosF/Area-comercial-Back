@@ -49,6 +49,7 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -85,7 +86,7 @@ WSGI_APPLICATION = 'server.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'area_comercial',
+        'NAME': 'AreaComercial',
         'USER': 'postgres',
         'PASSWORD': ' ',
         'HOST': 'localhost',
@@ -134,3 +135,10 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
+EMAIL_HOST_USER = 'f7a28c44449c62'
+EMAIL_HOST_PASSWORD = 'e7fa7b0086c317'
+EMAIL_PORT = '2525'
+EMAIL_USE_TLS = True
