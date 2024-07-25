@@ -35,4 +35,3 @@ def register(request):
         return Response({'token': token.key,'user': serializer.data},status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_401_UNAUTHORIZED)
 
-    

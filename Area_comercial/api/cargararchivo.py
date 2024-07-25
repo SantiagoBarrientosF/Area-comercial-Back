@@ -1,13 +1,13 @@
 import pandas as pd
 from django.http import JsonResponse
-from Area_comercial.models import Informe
+from Area_comercial.models import Ofertas
 import io
 from rest_framework.decorators import api_view
 
 @api_view(['POST'])
 def Cargararchivo(request):
     file = request.FILES.getlist("file")
-    Informe.objects.all().delete()
+    Ofertas.objects.all().delete()
     for file in file:
         try:
             df = pd.read_excel(io.BytesIO(file.read()), usecols=[
@@ -18,7 +18,7 @@ def Cargararchivo(request):
             ], sheet_name='2023')
            
             for index, row in df.iterrows():
-                Informe.objects.create(
+                Ofertas.objects.create(
                     Mes=row['MES'],
                     Cliente=row['CLIENTES'],
                     Nuevo=row['NUEVO (SI/NO)'],

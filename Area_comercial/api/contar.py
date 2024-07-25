@@ -1,5 +1,5 @@
 from Area_comercial.api.serializer import *
-from Area_comercial.models import Informe
+from Area_comercial.models import Ofertas
 from rest_framework.views import APIView
 from rest_framework import status 
 from collections import Counter
@@ -19,7 +19,7 @@ class Contarestados(APIView):
            'Negado' : 'Negado',
         }
            
-        informes = Informe.objects.all()
+        informes = Ofertas.objects.all()
         estado_contado = Counter(Informe.Estado for Informe in informes if Informe.Estado in estados_contar)
                
         return JsonResponse({'estados_contador': dict(estado_contado)}, status=status.HTTP_200_OK)   
@@ -35,9 +35,8 @@ class ContarestadoMes(APIView):
            'Cerrado' : 'Cerrado',
            'Negado' : 'Negado',
         }
-        informes = Informe.objects.all()
+        informes = Ofertas.objects.all()
         estados_por_mes = defaultdict(Counter)
-
         for informe in informes:
             if informe.Estado in estados_contar:
                 estados_por_mes[informe.Mes][informe.Estado] += 1
@@ -48,6 +47,9 @@ class ContarestadoMes(APIView):
         return JsonResponse({'estados_por_mes': estados_por_mes}, status=status.HTTP_200_OK)
 
         
-        
-        
-   
+class filtrartipificacion(APIView):
+    def get(self,request):            
+     
+     informes = Ofertas.objects.all()
+     estado_contado = Counter(Informe.Estado for Informe in informes if Informe.Estado in informes)
+     return JsonResponse({'data': 'Registrada'})

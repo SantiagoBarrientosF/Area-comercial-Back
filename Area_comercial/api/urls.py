@@ -4,18 +4,20 @@ from . import views
 from . import getdata
 from django.contrib.auth import views as auth_views
 from Area_comercial.api.cargararchivo import Cargararchivo
-from Area_comercial.api.contar import Contarestados, ContarestadoMes
-from Area_comercial.api.getdata import Save,Update
+from Area_comercial.api.contar import Contarestados, ContarestadoMes, filtrartipificacion
+from Area_comercial.api.getdata import SaveEmpresa,Update,Showofertas
 urlpatterns = [
     path('login/', views.login ),
     path('register/', views.register ),
-    path('contact/', Save.as_view()),
+    path('contact/', SaveEmpresa.as_view()),
+    path('ofertas/', Showofertas.as_view()),
     path('contact/<int:id>', Update.as_view()),
     # path('update_estado/<int:id>', getdata.Hablitar),
     # path('get_informe/', getdata.informe_list),
     path('cargar-archivos/', Cargararchivo),
     path('contar/', Contarestados.as_view()),
     path('contar_mes/', ContarestadoMes.as_view()),
+    path('filtrar/', filtrartipificacion.as_view()),
     path('password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
     path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
