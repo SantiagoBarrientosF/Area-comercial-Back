@@ -1,7 +1,7 @@
 
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from Area_comercial.models import Ofertas,Empresa
+from Area_comercial.models import Ofertas,Empresa,Notas
 
 # The `UserSerializer` class defines a serializer for the User model with specified fields.
 class UserSerializer(serializers.ModelSerializer):
@@ -20,6 +20,16 @@ class InformeSerializer(serializers.ModelSerializer):
 class EmpresaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Empresa
-        fields = '__all__'        
+        fields = '__all__'  
         
         
+class NotasSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Notas
+        fields = '__all__'                
+        
+        
+class OfertasSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Ofertas
+        fields = '__all__'                

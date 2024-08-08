@@ -1,6 +1,6 @@
 import pandas as pd
 from django.http import JsonResponse
-from Area_comercial.models import Ofertas
+from Area_comercial.models import Ofertas,Empresa
 import io
 from rest_framework.decorators import api_view
 
@@ -14,13 +14,17 @@ def Cargararchivo(request):
                 "MES","CLIENTES", "NUEVO (SI/NO)", "DESCRIPCION",
                 "ESTADO", "MENSUAL","POR CAMPAÑA", 
                 "SECTOR", "CANAL O MEDIO ", 
-                "CAUSAL NEGACION","OBSERVACIONES"
-            ], sheet_name='2023')
+                "CAUSAL NEGACION"
+            ], sheet_name='2024')
            
             for index, row in df.iterrows():
+                data, created = Empresa.objects.get_or_create(
+                     Nombre_empresa=row['CLIENTES'],
+                )
+                
                 Ofertas.objects.create(
                     Mes=row['MES'],
-                    Cliente=row['CLIENTES'],
+                    Cliente = data,
                     Nuevo=row['NUEVO (SI/NO)'],
                     Descripcion=row['DESCRIPCION'],
                     Estado=row['ESTADO'],
@@ -29,8 +33,11 @@ def Cargararchivo(request):
                     Sector=row['SECTOR'],
                     Canal_medio=row['CANAL O MEDIO '],
                     Causal_negacion=row['CAUSAL NEGACION'],
-                    Observaciones=row['OBSERVACIONES']
+                   
                 )
+                
+                
+
         except ValueError as e:
             print(f"Error al leer el archivo Excel: {e} {file}")
             return JsonResponse({'error': 'Hubo un error al leer el archivo Excel.'}, status=400)
