@@ -8,7 +8,7 @@ class Empresa(models.Model):
     Email = models.CharField(max_length=200, default=0)
 # crea
 class Notas(models.Model):
-    notas = models.CharField(max_length=200)
+    notas = models.CharField(max_length=200,null=True)
          
 # Tabla de Empresa
 class Ofertas(models.Model):

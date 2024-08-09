@@ -8,6 +8,7 @@ from Area_comercial.api.contar import Contarestados, ContarestadoMes, FiltrarTip
 from Area_comercial.api.ofertas import Showofertas,Update_ofertas
 from Area_comercial.api.notas import  *
 from Area_comercial.api.empresas import *
+from Area_comercial.api.Descargar import Exportecomercial
 urlpatterns = [
     path('login/', views.login ),
     path('register/', views.register ),
@@ -15,8 +16,9 @@ urlpatterns = [
     path('ofertas/<int:id>', Update_ofertas.as_view()),
     path('notas/', noterequest.as_view()),
     path('notas/<int:id>', Update_notas.as_view()),
-    path('empresas/', empresa_request.as_view()),
-    path('empresas/<int:id>', Update_empresa.as_view()),
+    path('contact/', empresa_request.as_view()),
+    path('contact/<int:id>', Update_empresa.as_view()),
+    path('descargar/', Exportecomercial.as_view()),
     # path('update_estado/<int:id>', getdata.Hablitar),
     # path('get_informe/', getdata.informe_list),
     path('cargar-archivos/', Cargararchivo),

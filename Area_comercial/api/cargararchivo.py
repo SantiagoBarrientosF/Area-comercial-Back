@@ -1,6 +1,6 @@
 import pandas as pd
 from django.http import JsonResponse
-from Area_comercial.models import Ofertas,Empresa
+from Area_comercial.models import Ofertas,Empresa,Notas
 import io
 from rest_framework.decorators import api_view
 
@@ -18,10 +18,13 @@ def Cargararchivo(request):
             ], sheet_name='2024')
            
             for index, row in df.iterrows():
+             if pd.notnull(row['MES']) or pd.notnull(row['CLIENTES']) or pd.notnull(row['NUEVO (SI/NO)']) or pd.notnull(row['DESCRIPCION']) or pd.notnull(row['ESTADO']) or pd.notnull(row['MENSUAL']) or pd.notnull(row['POR CAMPAÑA']) or pd.notnull(row['SECTOR']) or pd.notnull(row['CANAL O MEDIO ']) or pd.notnull(row['CAUSAL NEGACION']): 
                 data, created = Empresa.objects.get_or_create(
                      Nombre_empresa=row['CLIENTES'],
                 )
-                
+                nota,created = Notas.objects.get_or_create(
+                     notas = ""
+                 )
                 Ofertas.objects.create(
                     Mes=row['MES'],
                     Cliente = data,
@@ -33,7 +36,7 @@ def Cargararchivo(request):
                     Sector=row['SECTOR'],
                     Canal_medio=row['CANAL O MEDIO '],
                     Causal_negacion=row['CAUSAL NEGACION'],
-                   
+                    notas = nota
                 )
                 
                 
