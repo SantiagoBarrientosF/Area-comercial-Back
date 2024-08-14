@@ -3,11 +3,13 @@ from django.http import JsonResponse
 from Area_comercial.models import Ofertas,Empresa,Notas
 import io
 from rest_framework.decorators import api_view
+from Area_comercial.api.serializer import NotasSerializer
 
 @api_view(['POST'])
 def Cargararchivo(request):
     file = request.FILES.getlist("file")
     Ofertas.objects.all().delete()
+    Notas.objects.all().delete()
     for file in file:
         try:
             df = pd.read_excel(io.BytesIO(file.read()), usecols=[
@@ -22,7 +24,7 @@ def Cargararchivo(request):
                 data, created = Empresa.objects.get_or_create(
                      Nombre_empresa=row['CLIENTES'],
                 )
-                nota,created = Notas.objects.get_or_create(
+                nota = Notas.objects.create(
                      notas = ""
                  )
                 Ofertas.objects.create(
@@ -39,11 +41,8 @@ def Cargararchivo(request):
                     notas = nota
                 )
                 
-                
-
         except ValueError as e:
             print(f"Error al leer el archivo Excel: {e} {file}")
             return JsonResponse({'error': 'Hubo un error al leer el archivo Excel.'}, status=400)
-    
-    # Si todo va bien, devolver una respuesta de éxito
-    return JsonResponse({'message': 'Archivos cargados exitosamente.'})
+    ids = list(Notas.objects.values_list('id', flat=True))        
+    return JsonResponse({'data':ids, 'message': 'Archivos cargados exitosamente.'})
