@@ -4,7 +4,7 @@ from . import views
 from . import ofertas
 from django.contrib.auth import views as auth_views
 from Area_comercial.api.cargararchivo import Cargararchivo
-from Area_comercial.api.contar import Contarestados, ContarestadoMes, FiltrarTipificacion
+from Area_comercial.api.contar2 import Contarestados, ContarestadoMes, FiltrarTipificacion
 from Area_comercial.api.ofertas import Showofertas,Update_ofertas
 from Area_comercial.api.notas import  *
 from Area_comercial.api.empresas import *
@@ -19,8 +19,6 @@ urlpatterns = [
     path('contact/', empresa_request.as_view()),
     path('contact/<int:id>', Update_empresa.as_view()),
     path('descargar/', Exportecomercial.as_view()),
-    # path('update_estado/<int:id>', getdata.Hablitar),
-    # path('get_informe/', getdata.informe_list),
     path('cargar-archivos/', Cargararchivo),
     path('contar/', Contarestados.as_view()),
     path('contar_mes/', ContarestadoMes.as_view()),
