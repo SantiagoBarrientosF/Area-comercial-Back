@@ -44,16 +44,14 @@ class Showofertas(APIView):
             Cliente_id = request.data.get('cliente')  
 
             Cliente = Empresa.objects.get(id=Cliente_id)
-            data_nota = Notas.objects.create(
-                notas=""
-            )
             
             Month = datetime.now().month
+            Year = datetime.now().year
             if Pago_mensual:
                 Por_campaña = None  
             else:
                 Pago_mensual = None  
-            
+    
             data = Ofertas(
                 Mes=Month,
                 Descripcion=Descripcion,
@@ -64,7 +62,7 @@ class Showofertas(APIView):
                 Por_campaña=Por_campaña,   
                 Canal_medio=Canal_medio, 
                 Cliente=Cliente,
-                notas_id=data_nota.id
+                Anio = Year
             )
             data.save()
             
@@ -82,6 +80,7 @@ class Showofertas(APIView):
                 'canal_medio': last_item.Canal_medio,
                 'cliente': Cliente_id,
                 'causal_negacion': last_item.Causal_negacion,
+                'anio' : last_item.Anio
             }
             
             return JsonResponse({'data': item_dict}, safe=False)

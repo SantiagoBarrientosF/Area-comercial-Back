@@ -4,7 +4,7 @@ from . import views
 from . import ofertas
 from django.contrib.auth import views as auth_views
 from Area_comercial.api.cargararchivo import Cargararchivo
-from Area_comercial.api.contar2 import Contarestados, ContarestadoMes, FiltrarTipificacion
+from Area_comercial.api.contar import Contarestados, ContarestadoMes, FiltrarTipificacion
 from Area_comercial.api.ofertas import Showofertas,Update_ofertas
 from Area_comercial.api.notas import  *
 from Area_comercial.api.empresas import *

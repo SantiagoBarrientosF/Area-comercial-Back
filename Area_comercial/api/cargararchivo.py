@@ -23,14 +23,13 @@ def Cargararchivo(request):
              if pd.notnull(row['MES']) or pd.notnull(row['CLIENTES']) or pd.notnull(row['NUEVO (SI/NO)']) or pd.notnull(row['DESCRIPCION']) or pd.notnull(row['ESTADO']) or pd.notnull(row['MENSUAL']) or pd.notnull(row['POR CAMPAÑA']) or pd.notnull(row['SECTOR']) or pd.notnull(row['CANAL O MEDIO ']) or pd.notnull(row['CAUSAL NEGACION']): 
                 data, created = Empresa.objects.get_or_create(
                      Nombre_empresa=row['CLIENTES'],
+                     Nuevo=row['NUEVO (SI/NO)'],
                 )
-                nota = Notas.objects.create(
-                     notas = ""
-                 )
+            
+                 
                 Ofertas.objects.create(
                     Mes=row['MES'],
                     Cliente = data,
-                    Nuevo=row['NUEVO (SI/NO)'],
                     Descripcion=row['DESCRIPCION'],
                     Estado=row['ESTADO'],
                     Pago_mensual=row['MENSUAL'],
@@ -38,7 +37,6 @@ def Cargararchivo(request):
                     Sector=row['SECTOR'],
                     Canal_medio=row['CANAL O MEDIO '],
                     Causal_negacion=row['CAUSAL NEGACION'],
-                    notas = nota
                 )
                 
         except ValueError as e:

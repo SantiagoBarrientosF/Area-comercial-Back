@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -141,3 +141,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 SECURE_SSL_REDIRECT  = False
 SESSION_COOKIE_SECURE = False
+
+# Data encriptation
+
+ENCRYPTION_KEY = os.getenv('ENCRYPTION_KEY', 'eJPra4ñP8L_TpVcFh9YaXIz5ZLnQn1Klñne9yByu5mmk=')
