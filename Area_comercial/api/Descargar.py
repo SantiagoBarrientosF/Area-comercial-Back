@@ -9,10 +9,11 @@ class Exportecomercial(APIView):
    def get(self, request):   
        
     datos = []
-    ofertas = Ofertas.objects.all().select_related('Cliente','notas')
-    
+    ofertas = Ofertas.objects.all().select_related('Cliente')
+    notas  =Notas.objects.all().select_related('ofertas')
     for oferta in ofertas:
-            datos.append({
+        item = Notas.objects.all()
+        datos.append({
                 'Empresa': oferta.Cliente.Nombre_empresa,
                 'Descripcion':oferta.Descripcion,
                 'Estado':oferta.Estado,
@@ -21,7 +22,6 @@ class Exportecomercial(APIView):
                 'Sector':oferta.Sector,
                 'Canal o medio':oferta.Canal_medio,
                 'Causal negacion':oferta.Causal_negacion,
-                'Nota': oferta.notas.notas
 
             })
     

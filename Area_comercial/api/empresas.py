@@ -5,16 +5,27 @@ from django.http import JsonResponse
 from rest_framework.views import APIView
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
-
+from .utils.encryption import *
 
 
 class empresa_request(APIView):
    authentication_classes = [TokenAuthentication]
    permission_classes = [IsAuthenticated]  
    def get(request,self):
-      items = Empresa.objects.all()
-      items_list = list(items.values()) 
-      return JsonResponse(items_list, safe=False)
+    items = Empresa.objects.all()
+    items_list = [] 
+    for item in items: 
+       if item.Estado == 'Habilitado' and 'habilitado':
+          item_dict ={
+             'id':item.id,
+             'Nombre_empresa':item.Nombre_empresa,
+             'Email':item.Email,
+             'Encargado':item.Encargado,
+             'Telefono':item.Telefono,
+             'nuevo':item.Nuevo
+          }       
+          items_list.append(item_dict)
+    return JsonResponse(items_list, safe=False)
 
    def post(self,request):
       if request.method == 'POST':
@@ -47,9 +58,10 @@ class Update_empresa(APIView):
         empresa = get_object_or_404(Empresa, id=id)
         empresa.Nombre_empresa = request.data.get('Nombre_empresa')
         empresa.Nuevo = request.data.get('nuevo')
-        empresa.Encargado = request.data.get('Encargado')
-        empresa.Telefono = request.data.get('Telefono')
-        empresa.Email = request.data.get('Email')   
+        empresa.Encargado = request.data.get('encargado')
+        empresa.Telefono = request.data.get('telefono')
+        empresa.Email = request.data.get('email')   
+        empresa.Estado = request.data.get('estado')
         empresa.save()
         
         return JsonResponse({'status': 'success', 'message': 'Datos actualizados correctamente'})

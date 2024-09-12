@@ -1,10 +1,6 @@
 from django.db import models
 
 #Creacion de tablas
-class Notas(models.Model):
-    titulo = models.CharField(max_length=200,null=True)
-    descripcion = models.CharField(max_length=200,null=True)
-    fecha = models.DateTimeField(null=True)
     
     
     
@@ -14,7 +10,7 @@ class Empresa(models.Model):
     Encargado = models.CharField(max_length=200,default=0)
     Telefono = models.CharField(max_length=200, default=0)
     Email = models.CharField(max_length=200, default=0)
-    notas = models.ForeignKey(Notas,on_delete=models.CASCADE,null = True)
+    Estado = models.CharField(max_length=200,default='Habilitado')
 
 # crea
 
@@ -31,5 +27,10 @@ class Ofertas(models.Model):
  Canal_medio = models.CharField(max_length=200, default='l',null=True)
  Causal_negacion = models.CharField(max_length=200,null=True)    
  Anio  = models.CharField(max_length=200,null=True)  
+
  
- 
+class Notas(models.Model):
+    titulo = models.CharField(max_length=200,null=True)
+    descripcion = models.CharField(max_length=200,null=True)
+    fecha = models.DateField(null=True)
+    ofertas = models.ForeignKey(Ofertas,on_delete=models.CASCADE,null = True)

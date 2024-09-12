@@ -9,8 +9,10 @@ from Area_comercial.api.ofertas import Showofertas,Update_ofertas
 from Area_comercial.api.notas import  *
 from Area_comercial.api.empresas import *
 from Area_comercial.api.Descargar import Exportecomercial
+from .procesos import get_notas_comercial
 urlpatterns = [
     path('login/', views.login ),
+    path('logout/',views.logout),
     path('register/', views.register ),
     path('ofertas/', Showofertas.as_view()),
     path('ofertas/<int:id>', Update_ofertas.as_view()),
@@ -27,6 +29,7 @@ urlpatterns = [
     path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
+    path('notas_get/',get_notas_comercial)
 ]
 
 

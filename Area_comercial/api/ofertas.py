@@ -6,6 +6,8 @@ from rest_framework.views import APIView
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from datetime import datetime
+from .utils.encryption import *
+
 
 class Showofertas(APIView):
    authentication_classes = [TokenAuthentication]
@@ -51,7 +53,6 @@ class Showofertas(APIView):
                 Por_campaña = None  
             else:
                 Pago_mensual = None  
-    
             data = Ofertas(
                 Mes=Month,
                 Descripcion=Descripcion,
@@ -80,7 +81,7 @@ class Showofertas(APIView):
                 'canal_medio': last_item.Canal_medio,
                 'cliente': Cliente_id,
                 'causal_negacion': last_item.Causal_negacion,
-                'anio' : last_item.Anio
+                'anio':last_item.Anio
             }
             
             return JsonResponse({'data': item_dict}, safe=False)
