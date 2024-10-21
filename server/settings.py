@@ -25,13 +25,13 @@ SECRET_KEY = 'django-insecure-yrbd-$5fkkzlg)=o)^uhh8y#xwsabg__63&$tz8)%fh@a4k+=$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
-   'django.contrib.admin',
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -89,7 +89,7 @@ DATABASES = {
         'NAME': 'Area_comercial_bd',
         'USER': 'postgres',
         'PASSWORD': ' ',
-        'HOST': 'localhost',
+        'HOST': 'db',
         'PORT': '5432',
     }
 }
